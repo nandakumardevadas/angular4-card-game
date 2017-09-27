@@ -1,0 +1,29 @@
+<div class="container pages">
+  <div class="panel panel-primary login page areaContainer" *ngIf="joinned; else loginGame">
+  <div class="playingContainer">
+      <div class="panel-body">
+          <h2 class="title welcomeMsg">Welcome {{ newUser.nickName}}</h2>
+          <div class="messageContainer">
+              <p>{{ statusMessage.message }}</p>
+          </div>
+          <div *ngIf="ready && !started">
+            <button type="button" class="button" [disabled]="!ready && started" (click)="startGame()">Start Game</button>
+          </div>
+      </div>
+  </div>
+  </div>
+  <ng-template #loginGame>
+    <div class="panel panel-primary login page">
+      <div class="panel-body form">
+          <h2 class="title">What's your nickname?</h2>
+          <form (keydown)="joinGame($event)" #loginGameForm="ngForm" >
+            <div>
+                <input type="text" [(ngModel)]="newUser.nickName" name="nickName" class="usernameInput" autocomplete="off">
+                <input type="hidden" [(ngModel)]="newUser.roomName" name="roomName">
+            </div>           
+            <!-- <button type="submit" class="button button-success " [disabled]="!loginGameForm.form.valid">Join Game</button> -->
+        </form>
+      </div>
+    </div>
+  </ng-template>
+</div>
