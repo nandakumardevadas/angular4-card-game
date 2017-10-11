@@ -7,6 +7,7 @@ var cards = require('../utilities/cards');
 var numOfUser = 0;
 var pack, shuffledPack;
 var hands = {};
+var isGameStarted = false;
 
 server.listen(4000);
 io.on('connection', function(socket){
@@ -26,6 +27,7 @@ io.on('connection', function(socket){
         socket.room = data.room;
         data.numOfUser = numOfUser;
         data.message = (numOfUser == 1) ? messageString+' Waiting for other players to join!!!' : messageString;
+        data.clientId = this.id;
         this.emit('loggedIn', data);
         this.broadcast.emit('newPlayerJoined', data);
         this.join(socket.room);    
@@ -35,27 +37,43 @@ io.on('connection', function(socket){
     socket.on('initGame', function(){
         pack = cards.createPack();
         shuffledPack = cards.shufflePack(pack);  
-        // console.log("Size of pack before draw: " + socket.shuffledPack.length);  
-        // console.log("Drawing 5 cards.");  
-        // socket.hand = cards.draw(socket.myPack, 5, '', true);  
-        // console.log("Size of pack after draw: " + socket.myPack.length);  
-        // console.log("Cards in hand:");  
-        // console.log(socket.hand); 
         let clients = getClientsByRoom(socket.room);
         console.log(clients);
         for (var clientId in clients ) {
             let hand = hands[clientId] = cards.draw(shuffledPack, 5, '', true);
-            //this is the socket of each client in the room.
             let clientSocket = io.sockets.connected[clientId].emit('displayMyCards', hand);
     
         }
-        console.log(shuffledPack.length);
+        isGameStarted = true;
+    });
+
+    socket.on('playCard', function (data) {
+        var userPlayedCards = data.cards;
+        var hand = playCard(1, hands[data.socketId], data.cards, socket.room);
+        var clientSocket = io.sockets.connected[data.socketId].emit('displayMyCards', hand, true);
+        console.log(playedCards);
+        socket.broadcast.to(socket.room).emit('displayPlayingArea', data.cards);
     });
 });
 
 function getClientsByRoom(roomName) {
     return io.sockets.adapter.rooms[roomName].sockets;
 }
+
+function playCard(amount, hand, index, currentGameId) {  
+    var cardsList = hand;
+    for (var e in index) {
+      console.log(playedCards.hasOwnProperty(currentGameId));
+      if(!playedCards.hasOwnProperty(currentGameId)) {
+        playedCards[currentGameId] = [];
+      }
+      playedCards[currentGameId].push(index[e]);
+      console.log('Index'+index[e]);
+      var cardIndex = hand.indexOf(index[e]);
+      hand.splice(cardIndex, amount);
+    }
+    return hand;
+  }
 router.get('/', function(request, response, next){
     response.send('Game Index');
 });

@@ -9,6 +9,26 @@
           <div *ngIf="ready && !started">
             <button type="button" class="button" [disabled]="!ready && started" (click)="startGame()">Start Game</button>
           </div>
+          <div class="drawingArea">
+              <div class="drawCardsCenter">
+                  
+              </div>
+              <div class="drawPlayedCards">
+                  <div class="card" *ngFor="let cards of chosenCards; let i = index">
+                      <img class="drawLastPlayed" (click)="drawLastPlayedCards(cards)" src="assets/cards/{{ cards }}.svg">
+                  </div>
+              </div>
+          </div>
+          <div class="cardsInHand">
+              <div class="hand spread">
+                <div class="card" *ngFor="let cards of cardsInHand; let i = index">
+                    <img class="image" src="assets/cards/{{ cards }}.svg">
+                    <div class="middle">
+                      <div class="text" class="choose-card" (click)="chooseCard(cards)">Choose</div>
+                    </div>
+                </div>
+              </div>
+          </div>
       </div>
   </div>
   </div>

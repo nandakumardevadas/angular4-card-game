@@ -7,16 +7,19 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
+import { HomeComponent } from './home/home.component';
 
 const ROUTES = [
   { path: '', redirectTo: 'game', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'game', component: GameComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent
+    GameComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

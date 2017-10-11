@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as io from "socket.io-client";
+declare var $ :any;
 
 
 @Component({
@@ -17,7 +18,11 @@ export class GameComponent implements OnInit {
   joinned = false;
   ready = false;
   started = false;
+  userId: any;
   numOfUser = 0;
+  cardsInHand:any;
+  selectedCards = [];
+  chosenCards = [];
 
   constructor() { }
   
@@ -40,6 +45,7 @@ export class GameComponent implements OnInit {
             this.statusMessage = {
                 message: data.nickName+' joined the game...',
             }
+            this.userId = data.clientId;
             this.numOfUser  = data.numOfUser;
         }.bind(this));
 
@@ -48,37 +54,63 @@ export class GameComponent implements OnInit {
         }.bind(this));
 
         this.socket.on('displayMyCards', function(cards){
-            console.log(cards);
+            this.statusMessage = {
+                message: 'Game Started...',
+            }
+            this.cardsInHand = cards;
         }.bind(this));
   }
 
-  joinGame(event) {
-      if(event.keyCode == 13) {
-        localStorage.setItem('user', JSON.stringify(this.newUser));
-        this.socket.emit('joinGame', { 
-            room: this.newUser.roomName, 
-            nickName: this.newUser.nickName, 
-            message: 'You Joined the game.Yahooooooo!!!'
-        });
-      }
-  }
-
-  startGame() {
-      this.socket.emit('initGame');
-  }
-
-  private getCurrentUserInfo() {
-    return JSON.parse(localStorage.getItem("user"));    
-  }
-
-  private checkReadyToStart() {
-      console.log(this.numOfUser);
-    if(this.numOfUser > 1) {
-        this.ready = true;
-        this.started = false;
+    joinGame(event) {
+        if(event.keyCode == 13) {
+            localStorage.setItem('user', JSON.stringify(this.newUser));
+            this.socket.emit('joinGame', { 
+                room: this.newUser.roomName, 
+                nickName: this.newUser.nickName, 
+                message: 'You Joined the game.Yahooooooo!!!'
+            });
+        }
     }
-  }
 
+    startGame() {
+        this.socket.emit('initGame');
+    }
 
+    chooseCard(activeCard) {
+        var activeCardIndex = activeCard.slice(0, -1);
+        var cardValue = parseInt(activeCard, 10);
+        if (!$.isEmptyObject(this.chosenCards) && $.inArray(cardValue, this.selectedCards) == -1) {
+            this.chosenCards = [];
+            this.selectedCards = [];
+        }
+        this.chosenCards.push(activeCard);
+        this.selectedCards.push(cardValue);
+    }
 
+    private getCurrentUserInfo() {
+        return JSON.parse(localStorage.getItem("user"));    
+    }
+
+    private checkReadyToStart() {
+        if(this.numOfUser > 1) {
+            this.ready = true;
+            this.started = false;
+        }
+    }
+
+    private isEmpty(obj) {
+        for(var key in obj) {
+            if(obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    }
+
+    private inArray(value, array) {
+        if(array.indexOf(value) != -1)
+        {  
+            return true;
+        }
+        return false;
+    }
 }

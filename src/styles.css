@@ -1,166 +1,608 @@
-/* You can add global styles to this file, and also import other style files */
+You can add global styles to this file, and also import other style files
+/* @import url('https://fonts.googleapis.com/css?family=Bungee'); */
+
 * {
-    box-sizing: border-box;
-  }
-  
-  html {
-    font-weight: 300;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  html, input {
-    font-family:
-      "HelveticaNeue-Light",
-      "Helvetica Neue Light",
-      "Helvetica Neue",
-      Helvetica,
-      Arial,
-      "Lucida Grande",
-      sans-serif;
-  }
-  
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  ul {
-    list-style: none;
-    word-wrap: break-word;
-  }
-  
-  /* Pages */
-  
-  .pages {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
-  
-  .page {
-    height: 100%;
-    position: absolute;
-    width: 100%;
-  }
-  
-  /* Login Page */
-  
-  .login.page {
-    background-color: #000;
-  }
-  
-  .login.page .form {
-    height: 100px;
-    margin-top: -100px;
-    position: absolute;
-  
-    text-align: center;
-    top: 50%;
-    width: 100%;
-  }
-  
-  .login.page .form .usernameInput {
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid #fff;
-    outline: none;
-    padding-bottom: 15px;
-    text-align: center;
-    width: 400px;
-  }
-  
-  .title {
+  /* box-sizing: border-box; */
+}
+
+html {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, input {
+  font-family:
+    "Bungee"
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    "Lucida Grande",
+    sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background: #000;
+}
+
+ul {
+  list-style: none;
+  word-wrap: break-word;
+}
+
+/* Pages */
+
+.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.page {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* Login Page */
+
+.login.page {
+  background-color: #000;
+}
+
+.login.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+
+.login.page .form .usernameInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: center;
+  width: 400px;
+}
+
+.title {
+  font-size: 200%;
+}
+
+.login.page .usernameInput {
+  font-size: 200%;
+  letter-spacing: 3px;
+}
+
+.title, .login.page .usernameInput {
+  color: #fff;
+  font-weight: 300;
+}
+
+/* Chat page */
+
+.chat.page {
+  display: none;
+}
+
+/* Font */
+
+.messages {
+  font-size: 150%;
+}
+
+.inputMessage {
+  font-size: 100%;
+}
+
+.log {
+  color: gray;
+  font-size: 70%;
+  margin: 5px;
+  text-align: center;
+}
+
+/* Messages */
+
+.chatArea {
+  height: 100%;
+  padding-bottom: 60px;
+}
+
+.messages {
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 10px 20px 10px 20px;
+}
+
+.message.typing .messageBody {
+  color: gray;
+}
+
+.username {
+  font-weight: 700;
+  overflow: hidden;
+  padding-right: 15px;
+  text-align: right;
+}
+
+/* Input */
+
+.inputMessage {
+  border: 10px solid #000;
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  outline: none;
+  padding-left: 10px;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+
+.container p {
+  color: #fff;
+  font-size: 200%;
+  font-weight: 300;
+}
+.playingContainer {
+    text-align: center;   
+}
+.welcomeMsg {
+    text-transform: capitalize;
     font-size: 200%;
-  }
-  
-  .login.page .usernameInput {
-    font-size: 200%;
-    letter-spacing: 3px;
-  }
-  
-  .title, .login.page .usernameInput {
-    color: #fff;
-    font-weight: 300;
-  }
-  
-  /* Chat page */
-  
-  .chat.page {
-    display: none;
-  }
-  
-  /* Font */
-  
-  .messages {
-    font-size: 150%;
-  }
-  
-  .inputMessage {
-    font-size: 100%;
-  }
-  
-  .log {
-    color: gray;
-    font-size: 70%;
-    margin: 5px;
-    text-align: center;
-  }
-  
-  /* Messages */
-  
-  .chatArea {
-    height: 100%;
-    padding-bottom: 60px;
-  }
-  
-  .messages {
-    height: 100%;
-    margin: 0;
-    overflow-y: scroll;
-    padding: 10px 20px 10px 20px;
-  }
-  
-  .message.typing .messageBody {
-    color: gray;
-  }
-  
-  .username {
-    font-weight: 700;
-    overflow: hidden;
-    padding-right: 15px;
-    text-align: right;
-  }
-  
-  /* Input */
-  
-  .inputMessage {
-    border: 10px solid #000;
-    bottom: 0;
-    height: 60px;
-    left: 0;
-    outline: none;
-    padding-left: 10px;
-    position: absolute;
-    right: 0;
-    width: 100%;
-  }
-  
-  .container p {
-    color: #fff;
-    font-size: 200%;
-    font-weight: 300;
-  }
-  .playingContainer {
-      text-align: center;   
-  }
-  .welcomeMsg {
-      text-transform: capitalize;
-      font-size: 200%;
-  }
+}
 
 .messageContainer p {
-    text-transform: capitalize;
-    font-size: 150%;
+  text-transform: capitalize;
+  font-size: 150%;
 }
+
+/* html{
+  background: linear-gradient(#08f, #fff);
+  padding: 40px;
+  width: 170px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.trafficlight{
+  background: #222;
+  background-image: linear-gradient(transparent 2%, #111 2%, transparent 3%, #111 30%);
+  width: 170px;
+  height: 400px;
+  border-radius: 20px;
+  position: relative;
+  border: solid 5px #333;
+}
+
+.trafficlight:before{
+  background: #222;
+  background-image: radial-gradient(#444, #000);
+  content: "";
+  width: 170px;
+  height: 150px;
+  margin: 0 auto;
+  position: absolute;
+  top: -20px;
+  margin-left: 0px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.trafficlight:after{
+  background: #222;
+  background-image: linear-gradient(-90deg, #222 0%, #444 30%, #000);
+  content: "";
+  width: 50px;
+  height: 500px;
+  margin-left: 60px;
+  position: absolute;
+  top: 150px;
+  z-index: -1;
+}
+
+.protector{
+  background: transparent;
+  width: 180px;
+  height: 0;
+  position: absolute;
+  top: 20px;
+  left: -35px;
+  border-right: solid 30px transparent;
+  border-left: solid 30px transparent;
+  border-top: solid 90px #111;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+.protector:nth-child(2){
+  top: 140px;
+}
+
+.protector:nth-child(3){
+  top: 260px;
+}
+
+.red{
+  background: red;
+  background-image: radial-gradient(brown, transparent);
+  background-size: 5px 5px; 
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 35px;
+  animation: 13s red infinite;
+  border: dotted 2px red;
+  box-shadow: 
+    0 0 20px #111 inset,
+    0 0 10px red;
+}
+
+.yellow{
+  background: yellow;
+  background-image: radial-gradient(orange, transparent);
+  background-size: 5px 5px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: dotted 2px yellow;
+  position: absolute;
+  top: 145px;
+  left: 35px;
+  animation: 13s yellow infinite;
+  box-shadow: 
+    0 0 20px #111 inset,
+    0 0 10px yellow;
+}
+
+.green{
+  background: green;
+  background-image: radial-gradient(lime, transparent);
+  background-size: 5px 5px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: dotted 2px lime;
+  position: absolute;
+  top: 270px;
+  left: 35px;
+  box-shadow: 
+    0 0 20px #111 inset,
+    0 0 10px lime;
+  animation: 13s green infinite;
+}
+
+@keyframes red{
+  0%{opacity: 1}
+  20%{opacity: 1}
+  40%{opacity: 1}
+  60%{opacity: .1}
+  80%{opacity: .1}
+  100%{opacity: .1}
+}
+
+@keyframes yellow{
+  0%{opacity: .1}
+  20%{opacity: .1}
+  40%{opacity: 1}
+  50%{opacity: .1}
+  60%{opacity: .1}
+  80%{opacity: .1}
+  100%{opacity: .1}
+}
+
+@keyframes green{
+  0%{opacity: .1}
+  20%{opacity: .1}
+  40%{opacity: .1}
+  60%{opacity: 1}
+  80%{opacity: 1}
+  83%{opacity: .1}
+  86%{opacity: 1}
+  89%{opacity: .1}
+  93%{opacity: 1}
+  96%{opacity: .1}
+  100%{opacity: 1}
+} */
+/* 
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #ff5e3a;
+  background: -webkit-linear-gradient(top, #ff5e3a 0%, #ff2b67 100%);
+  background: -moz-linear-gradient(top, #ff5e3a 0%, #ff2b67 100%);
+  background: linear-gradient(to bottom, #ff5e3a 0%, #ff2b67 100%);
+  background-attachment: fixed;
+}
+
+.wrapper {
+  display: table;
+  width: 100%;
+  height: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.wrapper-center {
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+  vertical-align: middle;
+}
+
+.placescore {
+  width: 40%;
+  height: 0;
+  padding: 8% 8% 32% 8%;
+  padding: 8% 8% -webkit-calc(32% - 4px) 8%;
+  padding: 8% 8% -moz-calc(32% - 4px) 8%;
+  padding: 8% 8% calc(32% - 4px) 8%;
+  margin: 0 auto;
+  border: 2px solid #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+@media (min-width: 400px) {
+  .placescore {
+      padding: 8% 8% -webkit-calc(32% - 6px) 8%;
+      padding: 8% 8% -moz-calc(32% - 6px) 8%;
+      padding: 8% 8% calc(32% - 6px) 8%;
+      border: 3px solid #fff;
+  }
+}
+
+@media (min-width: 600px) {
+  .placescore {
+      padding: 8% 8% -webkit-calc(32% - 8px) 8%;
+      padding: 8% 8% -moz-calc(32% - 8px) 8%;
+      padding: 8% 8% calc(32% - 8px) 8%;
+      border: 4px solid #fff;
+  }
+}
+
+.placescore > div {
+  position: relative;
+  width: 66%;
+  height: 0;
+  padding-bottom: 100%;
+  margin: 0 auto;
+}
+
+.placescore-dot {
+  position: absolute;
+  width: 50%;
+  height: 0;
+  padding: 3% 3% 47% 3%;
+}
+
+.placescore-dot > div {
+  width: 100%;
+  padding-bottom: 100%;
+  background: #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+} */
+
+/*
+I used left & top because of a rendering bug
+with translate3d on resize
+*/
+
+/*
+And wow - the IE is buggy with '0' instead of '0%'
+*/
+/* 
+@-webkit-keyframes dot-1 {
+  85%, 0% {left: 0%; top: 66%;}
+  2.5%, 12.5% {left: 50%; top: 66%;}
+  15%, 30% {left: 50%; top: 33%;}
+  32.5%, 47.5% {left: 50%; top: 0%;}
+  50%, 65% {left: 0%; top: 0%;}
+  67.5%, 82.5% {left: 0%; top: 33%;}
+}
+
+@-moz-keyframes dot-1 {
+  85%, 0% {left: 0%; top: 66%;}
+  2.5%, 12.5% {left: 50%; top: 66%;}
+  15%, 30% {left: 50%; top: 33%;}
+  32.5%, 47.5% {left: 50%; top: 0%;}
+  50%, 65% {left: 0%; top: 0%;}
+  67.5%, 82.5% {left: 0%; top: 33%;}
+}
+
+@keyframes dot-1 {
+  85%, 0% {left: 0%; top: 66%;}
+  2.5%, 12.5% {left: 50%; top: 66%;}
+  15%, 30% {left: 50%; top: 33%;}
+  32.5%, 47.5% {left: 50%; top: 0%;}
+  50%, 65% {left: 0%; top: 0%;}
+  67.5%, 82.5% {left: 0%; top: 33%;}
+}
+
+@-webkit-keyframes dot-2 {
+  87.5%, 2.5% {left: 0%; top: 33%;}
+  5%, 20% {left: 0%; top: 66%;}
+  22.5%, 32.5% {left: 50%; top: 66%;}
+  35%, 50% {left: 50%; top: 33%;}
+  52.5%, 67.5% {left: 50%; top: 0%;}
+  70%, 85% {left: 0%; top: 0%;}
+}
+
+@-moz-keyframes dot-2 {
+  87.5%, 2.5% {left: 0%; top: 33%;}
+  5%, 20% {left: 0%; top: 66%;}
+  22.5%, 32.5% {left: 50%; top: 66%;}
+  35%, 50% {left: 50%; top: 33%;}
+  52.5%, 67.5% {left: 50%; top: 0%;}
+  70%, 85% {left: 0%; top: 0%;}
+}
+
+@keyframes dot-2 {
+  87.5%, 2.5% {left: 0%; top: 33%;}
+  5%, 20% {left: 0%; top: 66%;}
+  22.5%, 32.5% {left: 50%; top: 66%;}
+  35%, 50% {left: 50%; top: 33%;}
+  52.5%, 67.5% {left: 50%; top: 0%;}
+  70%, 85% {left: 0%; top: 0%;}
+}
+
+@-webkit-keyframes dot-3 {
+  90%, 5% {left: 0%; top: 0%;}
+  7.5%, 22.5% {left: 0%; top: 33%;}
+  25%, 40% {left: 0%; top: 66%;}
+  42.5%, 52.5% {left: 50%; top: 66%;}
+  55%, 70% {left: 50%; top: 33%;}
+  72.5%, 87.5% {left: 50%; top: 0%;}
+}
+
+@-moz-keyframes dot-3 {
+  90%, 5% {left: 0%; top: 0%;}
+  7.5%, 22.5% {left: 0%; top: 33%;}
+  25%, 40% {left: 0%; top: 66%;}
+  42.5%, 52.5% {left: 50%; top: 66%;}
+  55%, 70% {left: 50%; top: 33%;}
+  72.5%, 87.5% {left: 50%; top: 0%;}
+}
+
+@keyframes dot-3 {
+  90%, 5% {left: 0%; top: 0%;}
+  7.5%, 22.5% {left: 0%; top: 33%;}
+  25%, 40% {left: 0%; top: 66%;}
+  42.5%, 52.5% {left: 50%; top: 66%;}
+  55%, 70% {left: 50%; top: 33%;}
+  72.5%, 87.5% {left: 50%; top: 0%;}
+}
+
+@-webkit-keyframes dot-4 {
+  92.5%, 7.5% {left: 50%; top: 0%;}
+  10%, 25% {left: 0%; top: 0%;}
+  27.5%, 42.5% {left: 0%; top: 33%;}
+  45%, 60% {left: 0%; top: 66%;}
+  62.5%, 72.5% {left: 50%; top: 66%;}
+  75%, 90% {left: 50%; top: 33%;}
+}
+
+@-moz-keyframes dot-4 {
+  92.5%, 7.5% {left: 50%; top: 0%;}
+  10%, 25% {left: 0%; top: 0%;}
+  27.5%, 42.5% {left: 0%; top: 33%;}
+  45%, 60% {left: 0%; top: 66%;}
+  62.5%, 72.5% {left: 50%; top: 66%;}
+  75%, 90% {left: 50%; top: 33%;}
+}
+
+@keyframes dot-4 {
+  92.5%, 7.5% {left: 50%; top: 0%;}
+  10%, 25% {left: 0%; top: 0%;}
+  27.5%, 42.5% {left: 0%; top: 33%;}
+  45%, 60% {left: 0%; top: 66%;}
+  62.5%, 72.5% {left: 50%; top: 66%;}
+  75%, 90% {left: 50%; top: 33%;}
+}
+
+@-webkit-keyframes dot-5 {
+  95%, 10% {left: 50%; top: 33%;}
+  12.5%, 27.5% {left: 50%; top: 0%;}
+  30%, 45% {left: 0%; top: 0%;}
+  47.5%, 62.5% {left: 0%; top: 33%;}
+  65%, 80% {left: 0%; top: 66%;}
+  82.5%, 92.5% {left: 50%; top: 66%;}
+}
+
+@-moz-keyframes dot-5 {
+  95%, 10% {left: 50%; top: 33%;}
+  12.5%, 27.5% {left: 50%; top: 0%;}
+  30%, 45% {left: 0%; top: 0%;}
+  47.5%, 62.5% {left: 0%; top: 33%;}
+  65%, 80% {left: 0%; top: 66%;}
+  82.5%, 92.5% {left: 50%; top: 66%;}
+}
+
+@keyframes dot-5 {
+  95%, 10% {left: 50%; top: 33%;}
+  12.5%, 27.5% {left: 50%; top: 0%;}
+  30%, 45% {left: 0%; top: 0%;}
+  47.5%, 62.5% {left: 0%; top: 33%;}
+  65%, 80% {left: 0%; top: 66%;}
+  82.5%, 92.5% {left: 50%; top: 66%;}
+} */
+
+/* cubic-bezier(.5,1.5,.55,1) not t working anymore in chrome */ 
+/* cubic-bezier(.65,1.95,.03,.32) is working - strange? */
+/* 
+.placescore-dot-1 {
+  left: 0;
+  top: 66%;
+  -webkit-animation: dot-1 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  -moz-animation: dot-1 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  animation: dot-1 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+}
+
+.placescore-dot-2 {
+  left: 0;
+  top: 33%;
+  -webkit-animation: dot-2 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  -moz-animation: dot-2 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  animation: dot-2 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+}
+
+.placescore-dot-3 {
+  left: 0;
+  top: 0;
+  -webkit-animation: dot-3 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  -moz-animation: dot-3 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  animation: dot-3 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+}
+
+.placescore-dot-4 {
+  left: 50%;
+  top: 0;
+  -webkit-animation: dot-4 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  -moz-animation: dot-4 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  animation: dot-4 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+}
+
+.placescore-dot-5 {
+  left: 50%;
+  top: 33%;
+  -webkit-animation: dot-5 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  -moz-animation: dot-5 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+  animation: dot-5 8.5s 1s infinite cubic-bezier(.5,1.5,.55,1);
+}
+
+
+@keyframes dance {
+  0% { transform: scale(0); opacity: 0; }
+  4% { transform: scale(.9); opacity: 0; }
+  6% { transform: scale(1); opacity: 1; }
+  100% { transform: none; }
+} */

@@ -1,0 +1,10 @@
+#text {
+  position: absolute;
+  font-size: 6rem;
+  font-family: 'Bungee', sans;
+  background: url('http://i.giphy.com/sMTHIRlLgVwXu.gif') no-repeat center;
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: dance 10000ms ease-in-out infinite;
+}
