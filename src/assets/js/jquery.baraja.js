@@ -185,15 +185,15 @@ jQuery.fn.reverse = [].reverse;
 
 			}
 
-			this.$el.on( 'click.baraja', 'li', function() {
+			// this.$el.on( 'click.baraja', 'li', function() {
 
-				if( !self.isAnimating ) {
+			// 	if( !self.isAnimating ) {
 
-					self._move2front( $( this ) );
+			// 		self._move2front( $( this ) );
 
-				}
+			// 	}
 
-			} );
+			// } );
 
 		},
 		_resetTransition : function( $el ) {

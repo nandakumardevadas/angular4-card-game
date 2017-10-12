@@ -39,6 +39,17 @@ export class HomeComponent implements OnInit {
     } );
   }
 
+  rotateHorizontal() {
+    this.baraja.fan( {
+      speed : 500,
+      easing : 'ease-out',
+      range : 100,
+      direction : 'right',
+      origin : { x : 50, y : 200 },
+      center : true
+    } );
+  }
+
   close() {
     this.baraja.close();
   }

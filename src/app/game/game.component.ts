@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import * as io from "socket.io-client";
 declare var $ :any;
 
@@ -10,56 +10,72 @@ declare var $ :any;
 })
 export class GameComponent implements OnInit {
 
-  players: any;
-  roomName: any;
-  newUser = { roomName: this.roomName, nickName: '' };
-  statusMessage = { message: '' }
-  socket = io('http://localhost:4000');  
-  joinned = false;
-  ready = false;
-  started = false;
-  userId: any;
-  numOfUser = 0;
-  cardsInHand:any;
-  selectedCards = [];
-  chosenCards = [];
+    baraja: any;
+    players: any;
+    roomName: any;
+    newUser = { roomName: this.roomName, nickName: '' };
+    statusMessage = { message: '' }
+    socket = io('http://localhost:4000');  
+    joinned = false;
+    ready = false;
+    started = false;
+    userId: any;
+    numOfUser = 0;
+    cardsInHand:any;
+    selectedCards = [];
+    chosenCards = [];
+    playedCards = [];
 
-  constructor() { }
-  
-  ngOnInit() {
-        this.roomName = "VSOP";
-        this.newUser.roomName = this.roomName;
-        var user = this.getCurrentUserInfo();
-        this.socket.on('loggedIn', function(data){
-            let currentUser = this.getCurrentUserInfo();
-            if(data.room == currentUser.roomName) {
-                this.statusMessage = {
-                    message: data.message,
+    @ViewChildren('renderedCard') renderedCard: QueryList<any>;
+
+    constructor() { }
+    
+    ngOnInit() {
+            this.roomName = "VSOP";
+            this.newUser.roomName = this.roomName;
+            var user = this.getCurrentUserInfo();
+            this.socket.on('loggedIn', function(data){
+                let currentUser = this.getCurrentUserInfo();
+                if(data.room == currentUser.roomName) {
+                    this.statusMessage = {
+                        message: data.message,
+                    }
+                    this.joinned = true;
+                    this.numOfUser  = data.numOfUser;
                 }
-                this.joinned = true;
+            }.bind(this));
+
+            this.socket.on('newPlayerJoined', function(data){
+                this.statusMessage = {
+                    message: data.nickName+' joined the game...',
+                }
+                this.userId = data.clientId;
                 this.numOfUser  = data.numOfUser;
-            }
-        }.bind(this));
+            }.bind(this));
 
-        this.socket.on('newPlayerJoined', function(data){
-            this.statusMessage = {
-                message: data.nickName+' joined the game...',
-            }
-            this.userId = data.clientId;
-            this.numOfUser  = data.numOfUser;
-        }.bind(this));
+            this.socket.on('enableStart', function(data){
+                this.checkReadyToStart();
+            }.bind(this));
 
-        this.socket.on('enableStart', function(data){
-            this.checkReadyToStart();
-        }.bind(this));
+            this.socket.on('displayMyCards', function(cards){
+                this.statusMessage = {
+                    message: 'Game Started...',
+                }
+                this.cardsInHand = cards;
+            }.bind(this));
+    }
+    
+    ngAfterViewInit() {
+        this.renderedCard.changes.subscribe(t => {
+            this.ngForRendred();
+        })
+    }
 
-        this.socket.on('displayMyCards', function(cards){
-            this.statusMessage = {
-                message: 'Game Started...',
-            }
-            this.cardsInHand = cards;
-        }.bind(this));
-  }
+    ngForRendred() {
+        var $el = $( '#handCards' );
+        this.baraja = $el.baraja();
+        this.fanRight();
+    }
 
     joinGame(event) {
         if(event.keyCode == 13) {
@@ -87,6 +103,16 @@ export class GameComponent implements OnInit {
         this.selectedCards.push(cardValue);
     }
 
+    playCards() {
+        this.playedCards = [];
+        this.socket.emit('playCards', {
+            chosenCards: this.chosenCards
+        });
+        this.playedCards = this.chosenCards;
+        this.chosenCards = [];
+        this.selectedCards = [];
+    }
+
     private getCurrentUserInfo() {
         return JSON.parse(localStorage.getItem("user"));    
     }
@@ -112,5 +138,44 @@ export class GameComponent implements OnInit {
             return true;
         }
         return false;
+    }
+
+    fanRight() {
+        var $el = $( '#handCards' );
+        this.baraja = $el.baraja();
+        this.baraja.fan( {
+          speed : 500,
+          easing : 'ease-out',
+          range : 90,
+          direction : 'right',
+          origin : { x : 25, y : 100 },
+          center : true
+        });
+      }
+    
+    private centeredRound() {
+        this.baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 360,
+            direction : 'right',
+            origin : { x : 50, y : 90 },
+            center : false
+        } );
+    }
+
+    private rotateHorizontal() {
+        this.baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 100,
+            direction : 'right',
+            origin : { x : 50, y : 200 },
+            center : true
+        } );
+    }
+
+    private close() {
+        this.baraja.close();
     }
 }
