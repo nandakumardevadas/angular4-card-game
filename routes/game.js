@@ -77,7 +77,7 @@ io.on('connection', function(socket){
         if(shuffledPack.length == 0) {
             
         }
-        io.sockets.connected[data.userId].emit('displayMyCards', hands[data.userId], true);
+        io.sockets.connected[data.userId].emit('displayDrawnDeckCards', hands[data.userId], true);
     });
 });
 

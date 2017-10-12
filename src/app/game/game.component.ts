@@ -67,6 +67,7 @@ export class GameComponent implements OnInit {
             }.bind(this));
 
             this.displayLastPlayedCards();
+            this.displayDrawnDeckCards();
     }
     
     ngAfterViewInit() {
@@ -137,6 +138,12 @@ export class GameComponent implements OnInit {
         this.socket.emit('drawFromDeck', {
             userId: this.newUser.clientId
         })
+    }
+
+    private displayDrawnDeckCards() {
+        this.socket.on('displayDrawnDeckCards', function(cards){
+            this.cardsInHand = cards;
+        }.bind(this));
     }
 
     private getCurrentUserInfo() {
