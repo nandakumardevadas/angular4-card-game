@@ -13,7 +13,7 @@ export class GameComponent implements OnInit {
     baraja: any;
     players: any;
     roomName: any;
-    newUser = { roomName: this.roomName, nickName: '' };
+    newUser = { roomName: this.roomName, nickName: '', clientId: '' };
     statusMessage = { message: '' }
     socket = io('http://localhost:4000');  
     joinned = false;
@@ -25,6 +25,7 @@ export class GameComponent implements OnInit {
     selectedCards = [];
     chosenCards = [];
     playedCards = [];
+    selfPlayedCards = [];
 
     @ViewChildren('renderedCard') renderedCard: QueryList<any>;
 
@@ -42,6 +43,7 @@ export class GameComponent implements OnInit {
                     }
                     this.joinned = true;
                     this.numOfUser  = data.numOfUser;
+                    this.newUser.clientId = data.clientId;
                 }
             }.bind(this));
 
@@ -63,6 +65,8 @@ export class GameComponent implements OnInit {
                 }
                 this.cardsInHand = cards;
             }.bind(this));
+
+            this.displayLastPlayedCards();
     }
     
     ngAfterViewInit() {
@@ -104,13 +108,35 @@ export class GameComponent implements OnInit {
     }
 
     playCards() {
-        this.playedCards = [];
+        this.selfPlayedCards = this.chosenCards;
         this.socket.emit('playCards', {
-            chosenCards: this.chosenCards
+            chosenCards: this.chosenCards,
+            userId: this.newUser.clientId
         });
-        this.playedCards = this.chosenCards;
-        this.chosenCards = [];
-        this.selectedCards = [];
+    }
+
+    drawLastPlayedCards(lastPlayedCard) {
+        this.playedCards.splice( $.inArray(lastPlayedCard, this.playedCards), 1 );
+        this.socket.emit('drawLastPlayedCard', {
+            lastPlayed: lastPlayedCard,
+            userId: this.newUser.clientId
+        })
+        
+    }
+
+    private displayLastPlayedCards() {
+        this.socket.on('displayLastPlayedCards', function(data){
+            this.playedCards = [];
+            this.playedCards = data.lastPlayed;
+            this.chosenCards = [];
+            this.selectedCards = [];
+        }.bind(this));
+    }
+
+    private drawFromDeck() {
+        this.socket.emit('drawFromDeck', {
+            userId: this.newUser.clientId
+        })
     }
 
     private getCurrentUserInfo() {

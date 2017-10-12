@@ -1,5 +1,5 @@
 var cards = {};
-
+var deckCount = 3;
 cards.createPack = function() {  
     var suits = new Array("H", "C", "S", "D");
     var pack = new Array();
@@ -7,9 +7,10 @@ cards.createPack = function() {
     var index = n / suits.length;
 
     var count = 0;
-    for(i = 0; i <= 3; i++)
-        for(j = 1; j <= index; j++)
-            pack[count++] = j + suits[i];
+    for(e = 1; e <= 3; e++)
+        for(i = 0; i <= 3; i++)
+            for(j = 1; j <= index; j++)
+                pack[count++] = j + suits[i];
 
     return pack;  
 }
@@ -42,7 +43,10 @@ cards.draw = function(pack, amount, hand, initial) {
 }
 
 cards.playCard = function(amount, hand, index) {
-    hand.splice(index, amount)
+    for (var e in index) {
+        var cardIndex = hand.indexOf(index[e]);
+        hand.splice(cardIndex, amount);
+    }
     return hand;
 }
 

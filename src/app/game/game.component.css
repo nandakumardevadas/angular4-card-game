@@ -126,3 +126,7 @@
   .playCards img {
     width: 50px;
   }
+  .selfCards {
+      height: 300px;
+      background: green;
+  }

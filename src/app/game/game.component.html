@@ -11,7 +11,7 @@
           </div>
           <div class="drawingArea">
               <div class="drawCardsCenter">
-                  <img class="drawFromCenter" (click)="drawFromCenter(cards)" src="assets/cards/back.svg">
+                  <img class="drawFromDeck" (click)="drawFromDeck(cards)" src="assets/cards/back.svg">
               </div>
               <div class="drawPlayedCards">
                   <div class="card" *ngFor="let cards of playedCards; let i = index">
@@ -20,6 +20,12 @@
                   <div class="playCards">
                       <img class="playcard" (click)="playCards()" class="image" src="assets/images/upward.svg">
                   </div>
+              </div>
+          </div>
+
+          <div class="selfCards">
+              <div class="card" *ngFor="let cards of selfPlayedCards; let i = index">
+                  <img class="selfPlayedCards" src="assets/cards/{{ cards }}.svg">
               </div>
           </div>
           <div class="cardsInHand">
