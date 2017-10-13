@@ -116,7 +116,7 @@
   }*/
 
   .drawingArea {
-      height: 300px;
+      min-height: 300px;
       background: greenyellow;
   }
   .drawCardsCenter, .drawPlayedCards {
@@ -127,6 +127,10 @@
     width: 50px;
   }
   .selfCards {
-      height: 300px;
+      min-height: 300px;
       background: green;
+  }
+  .cardsInHand {
+      background: lightblue;
+      min-height: 300px;
   }
